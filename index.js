@@ -1,7 +1,8 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-const markDown = require('./utils/generateMarkdown');
+const generateMarkdown = require('./utils/generateMarkdown');
+
 
 
 // TODO: Create an array of questions for user input
@@ -9,39 +10,26 @@ const questions = [
     {
         type: 'input',
         name: 'name',
-        message: 'What is your name? (Required)',
-        validate: nameInput => {
-            if (nameInput) {
-                return true;
-            } else {
-                console.log('Please enter your name!');
-                return false;
-            }
-        }
+        message: "What is author's name?",
+
     },
     {
         type: 'input',
         name: 'github',
-        message: 'Enter your Github Username (Required)',
-        validate: nameInput => {
-            if (nameInput) {
-                return true;
-            } else {
-                console.log('Please enter your Github Username');
-                return false;
-            }
-        }
+        message: 'Enter your Github Username?',
+
     },
     {
-        type: 'confirm',
-        name: 'confirmAbout',
-        message: 'Would you like to enter some information about yourself for an "About" section?',
-        default: true
+        type: 'input',
+        name: 'email',
+        message: 'Enter your email address?',
+
     },
+
 
     {
         type: "input",
-        message: "What is the name of your Project?",
+        message: "What is the projetc title name?",
         name: "title"
 
     },
@@ -53,7 +41,7 @@ const questions = [
     },
     {
         type: 'input',
-        message: "Please provide the installation steps of your project",
+        message: "Please provide the installation steps of your project.",
         name: "installation"
 
     },
@@ -65,29 +53,32 @@ const questions = [
     },
     {
         type: 'input',
-        message: "list of collaborators if any",
+        message: "list of collaborators if any.",
         name: "credit"
 
     },
     {
-        type: 'input',
+        type: 'list',
         message: "What licenses are required with this project?",
-        name: "license"
+        name: "license",
+        choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "NONE"]
+
 
     },
     {
         type: 'input',
-        message: "any speacial feature/features of the project which you want to show ",
+        message: "any speacial feature/features of the project which you want to show. ",
         name: "features"
 
     },
     {
-        message: "list of contributors",
+        message: "list of contributors.",
         name: "contributors"
 
     },
     {
-        message: "write test for your application",
+        type: 'input',
+        message: "write test for your application.",
         name: "test"
 
     },
@@ -95,10 +86,26 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-//function writeToFile(fileName, data) { }
+function writeToFile(fileName, data) {
+    fs.writeFile("./dist/" + fileName, data, err => {
+        if (err) {
+            return console.log(err);
+
+        }
+        console.log("README created successfully!");
+
+    })
+
+}
 
 // TODO: Create a function to initialize app
-//function init() { }
+function init() {
+    inquirer.prompt(questions)
+        .then(function (data) {
+            writeToFile("README.md", generateMarkdown(data))
+
+        })
+}
 
 // Function call to initialize app
-//init();
+init();
