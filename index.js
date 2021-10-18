@@ -11,57 +11,90 @@ const questions = [
         type: 'input',
         name: 'name',
         message: "What is author's name?",
+        validate: (value) => {
+            if (value) { return true } else { return 'i need a value to continue' }
+        }
 
     },
     {
         type: 'input',
         name: 'github',
         message: 'Enter your Github Username?',
+        validate: (value) => {
+            if (value) { return true } else { return 'i need a value to continue' }
+        }
 
     },
     {
         type: 'input',
         name: 'email',
         message: 'Enter your email address?',
+        validate: (value) => {
+            if (value) { return true } else { return 'i need a value to continue' }
+        }
 
     },
-
 
     {
         type: "input",
         message: "What is the projetc title name?",
-        name: "title"
+        name: "title",
+        validate: (value) => {
+            if (value) { return true } else { return 'i need a value to continue' }
+        }
 
     },
     {
         type: 'input',
         message: "Please Provide description about your project",
-        name: "description"
+        name: "description",
+        validate: (value) => {
+            if (value) { return true } else { return 'i need a value to continue' }
+        }
 
     },
     {
         type: 'input',
         message: "Please provide the installation steps of your project.",
-        name: "installation"
+        name: "installation",
+        validate: (value) => {
+            if (value) { return true } else { return 'i need a value to continue' }
+        }
 
     },
     {
         type: 'input',
         message: "How your project can be useful to the user?",
-        name: "usage"
+        name: "usage",
+        validate: (value) => {
+            if (value) { return true } else { return 'i need a value to continue' }
+        },
 
     },
     {
         type: 'input',
-        message: "list of collaborators if any.",
-        name: "credit"
+        message: "list of collaborators if any else enter None.",
+        name: "credit",
+        validate: (value) => {
+            if (value) { return true } else { return 'i need a value to continue' }
+        }
 
     },
     {
         type: 'list',
-        message: "What licenses are required with this project?",
+        message: "license required for this project?",
         name: "license",
-        choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "NONE"]
+        choices:
+            ["Apache",
+                "Academic",
+                "GNU",
+                "ISC",
+                "MIT",
+                "Mozilla",
+                "Open"],
+        validate: (value) => {
+            if (value) { return true } else { return 'i need a value to continue' }
+        }
 
 
     },
@@ -86,6 +119,7 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
+
 function writeToFile(fileName, data) {
     fs.writeFile("./dist/" + fileName, data, err => {
         if (err) {
