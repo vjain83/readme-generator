@@ -26,6 +26,8 @@ npm install inquirer
 node index.js
 ```
 
+[![Demo Video for Readme Generator](./assets/images/Screenshot.png)](./assets/images/ReadmeGenerator-Demo.mp4)
+
 ### License:
 
 [![badge](https://img.shields.io/badge/License-Apache-yellow.svg)](https://opensource.org/licenses/Apache)

@@ -60,7 +60,7 @@ const questions = [
 
     },
     {
-        type: 'input',
+        type: 'editor',
         message: "Please provide the installation steps of your project.",
         name: "installation",
         validate: (value) => {
@@ -70,7 +70,7 @@ const questions = [
     },
     {
         type: 'input',
-        message: "Please provide usage information?",
+        message: "Please provide usage information.",
         name: "usage",
         validate: (value) => {
             if (value) { return true } else { return 'I need a value to continue' }

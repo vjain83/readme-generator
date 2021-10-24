@@ -1,30 +1,24 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-// function renderlicenseBadge(license) {
-//   if (!license) {
-//     return '';
-//   }
-//   return `
-//   ${data.license}`
-// }
+function renderLicenseBadge(license) {
+  if (license == "") {
+    return ""
+  }
 
-// // TODO: Create a function that returns the license link
-// // If there is no license, return an empty string
-// function renderLicenseLink(license) {
-//   if (!licenseLink) {
-//     return '';
+  return `https://img.shields.io/badge/License-${license}-yellow.svg`
+}
 
-//   }
-//   return ` {
-//     ${data.license}
-//   }`
-// }
+function renderLicenseLink(license) {
+  if (license == "") {
+    return ""
+  }
 
-// // TODO: Create a function that returns the license section of README
-// // If there is no license, return an empty string
-// function renderLicenseSection(license) {
+  return `https://opensource.org/licenses/${license}`
+}
 
-// }
+function renderLicenseSection(license) {
+  const licenseBadge = renderLicenseBadge(license);
+  const licenseLink = renderLicenseLink(license);
+  return `[![badge](${licenseBadge})](${licenseLink})`
+}
 
 
 function generateMarkdown(data) {
@@ -47,7 +41,7 @@ ${data.installation}
 ${data.usage}
 
 ### License:
-[![badge](https://img.shields.io/badge/License-${data.license}-yellow.svg)](https://opensource.org/licenses/${data.license})
+${renderLicenseSection(data.license)}
 
 ### Contributing:
 ${data.contributors}
