@@ -1,18 +1,15 @@
-// TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown');
 
 
-
-// TODO: Create an array of questions for user input
 const questions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is author's name?",
+        message: "What is your name?",
         validate: (value) => {
-            if (value) { return true } else { return 'i need a value to continue' }
+            if (value) { return true } else { return 'I need a value to continue' }
         }
 
     },
@@ -21,7 +18,16 @@ const questions = [
         name: 'github',
         message: 'Enter your Github Username?',
         validate: (value) => {
-            if (value) { return true } else { return 'i need a value to continue' }
+            if (value) { return true } else { return 'I need a value to continue' }
+        }
+
+    },
+    {
+        type: 'input',
+        name: 'githubreponame',
+        message: 'Enter the Github Repository name to create a badge.',
+        validate: (value) => {
+            if (value) { return true } else { return 'I need a value to continue' }
         }
 
     },
@@ -30,26 +36,26 @@ const questions = [
         name: 'email',
         message: 'Enter your email address?',
         validate: (value) => {
-            if (value) { return true } else { return 'i need a value to continue' }
+            if (value) { return true } else { return 'I need a value to continue' }
         }
 
     },
 
     {
         type: "input",
-        message: "What is the projetc title name?",
+        message: "What is the project title?",
         name: "title",
         validate: (value) => {
-            if (value) { return true } else { return 'i need a value to continue' }
+            if (value) { return true } else { return 'I need a value to continue' }
         }
 
     },
     {
-        type: 'input',
-        message: "Please Provide description about your project",
+        type: 'editor',
+        message: "Please provide description about your project.",
         name: "description",
-        validate: (value) => {
-            if (value) { return true } else { return 'i need a value to continue' }
+        validate: (description) => {
+            if (description) { return true } else { return 'I need a description to continue' }
         }
 
     },
@@ -58,67 +64,46 @@ const questions = [
         message: "Please provide the installation steps of your project.",
         name: "installation",
         validate: (value) => {
-            if (value) { return true } else { return 'i need a value to continue' }
+            if (value) { return true } else { return 'I need a value to continue' }
         }
 
     },
     {
         type: 'input',
-        message: "How your project can be useful to the user?",
+        message: "Please provide usage information?",
         name: "usage",
         validate: (value) => {
-            if (value) { return true } else { return 'i need a value to continue' }
-        },
-
-    },
-    {
-        type: 'input',
-        message: "list of collaborators if any else enter None.",
-        name: "credit",
-        validate: (value) => {
-            if (value) { return true } else { return 'i need a value to continue' }
+            if (value) { return true } else { return 'I need a value to continue' }
         }
-
     },
     {
         type: 'list',
-        message: "license required for this project?",
+        message: "License for this project?",
         name: "license",
         choices:
             ["Apache",
                 "Academic",
-                "GNU",
                 "ISC",
                 "MIT",
                 "Mozilla",
-                "Open"],
-        validate: (value) => {
-            if (value) { return true } else { return 'i need a value to continue' }
-        }
-
-
+                "Open",
+            ],
+        default: "None"
     },
     {
         type: 'input',
-        message: "any speacial feature/features of the project which you want to show. ",
-        name: "features"
-
-    },
-    {
-        message: "list of contributors.",
-        name: "contributors"
-
+        message: "List of contributors?",
+        name: "contributors",
+        default: "None"
     },
     {
         type: 'input',
-        message: "write test for your application.",
-        name: "test"
-
+        message: "How to test your application?",
+        name: "test",
+        default: "None"
     },
 
 ];
-
-// TODO: Create a function to write README file
 
 function writeToFile(fileName, data) {
     fs.writeFile("./dist/" + fileName, data, err => {
@@ -132,7 +117,6 @@ function writeToFile(fileName, data) {
 
 }
 
-// TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
         .then(function (data) {
